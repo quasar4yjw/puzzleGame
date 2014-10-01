@@ -52,14 +52,12 @@ body {
 
 
 #outline{
-  /* border: solid 1px red; */
+  border: dashed 1px blue; 
 }
-#puzzle span {
-/*  border : solid 1px blue; */
+#puzzleTop span {
+ border : dashed 1px blue;
   background-color: black;
   float:left;
-  
-  
   margin: 5px;
   overflow: hidden;
    padding: 100px 0 0 0;
@@ -67,19 +65,34 @@ body {
   z-index: 200;
 }
 
- #puzzle {
- position: relative;
-/*  border : solid 1px red; */
+ #puzzleTop {
+ position: absolute;
+ right:450px;
+ 
+ border : dashed 1px blue;
  height : 339px;
  width : 339px;
  margin: 0 auto;
  
 }
+#rightTop{
+	border: dashed 1px blue; 
+}
 
-#rightUI {
+
+#rightBot {
+	border: dashed 1px blue; 
   position: absolute;
   right: 200px;
   top: 30px;
+
+
+}
+#leftBot {
+	border: dashed 1px blue; 
+  position: absolute;
+  right: 450px;
+  top: 350px;
 
 
 }
