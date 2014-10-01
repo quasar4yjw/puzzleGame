@@ -29,7 +29,10 @@
  width : 339px;
  margin: 0 auto;
  
+
 }
+
+
 
 /* #puzzle #a {
  background-color: yellow;
@@ -95,8 +98,9 @@ function ready(){ //한번씩 뒤집어서 확인 시켜줄것. 준비,시작 �
     } 
   }
   window.setTimeout(function(){
+    rotate();
     console.log("게임 준비 완료");
-  }, 3000); 
+  }, 1000); 
 }
 function game_over(){ //게임 종료.졌다고 메세지 출력.시작으로 돌아감 
   
@@ -131,7 +135,9 @@ function change_color(i){
   box_id[i].style.backgroundColor = "#ff0000";
   window.setTimeout(function(){
     box_id[i].style.backgroundColor = "#000000";
-  }, 500);
+    
+  
+  }, 700);
 }
 
 function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남아있음
@@ -142,7 +148,16 @@ function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남
         $(this).css('transform','rotate('+now+'deg)');
         //console.log(now); //각도 출력
       },
-      duration:'fast'
+      duration:'low'
+  },'linear');
+  $('#puzzle').animate({  borderSpacing: -90 }, {
+      step: function(now,fx) {
+        $(this).css('-webkit-transform','rotate('+(now-90)+'deg)'); 
+        $(this).css('-moz-transform','rotate('+(now-90)+'deg)');
+        $(this).css('transform','rotate('+(now-90)+'deg)');
+        //console.log(now); //각도 출력
+      },
+      duration:'low'
   },'linear');
 }
 
@@ -193,89 +208,12 @@ window.setTimeout(function(){
 }, 3000); */
 
 
-
-/* $(box_id[0]).click(function(event){
-  if (box_state[0] == false){
-    $(box_id[0]).css( "background-color", 'lightblue' );
-    box_state[0] = true;}
-  else{ 
-    $(box_id[0]).css( "background-color", 'black' );
-    box_state[0] = false;}
-  });
-$(box_id[1]).click(function(event){
-    if (box_state[1] == false){
-      $(box_id[1]).css( "background-color", 'lightblue' );
-      box_state[1] = true;}
-    else{ 
-      $(box_id[1]).css( "background-color", 'black' );
-      box_state[1] = false;}
-    });
-$(box_id[2]).click(function(event){
-    if (box_state[2] == false){
-      $(box_id[2]).css( "background-color", 'lightblue' );
-      box_state[2] = true;}
-    else{ 
-      $(box_id[2]).css( "background-color", 'black' );
-      box_state[2] = false;}
-    });
-$(box_id[3]).click(function(event){
-    if (box_state[3] == false){
-      $(box_id[3]).css( "background-color", 'lightblue' );
-      box_state[3] = true;}
-    else{ 
-      $(box_id[3]).css( "background-color", 'black' );
-      box_state[3] = false;}
-    });
-$(box_id[4]).click(function(event){
-    if (box_state[4] == false){
-      $(box_id[4]).css( "background-color", 'lightblue' );
-      box_state[4] = true;}
-    else{ 
-      $(box_id[4]).css( "background-color", 'black' );
-      box_state[4] = false;}
-    });
-$(box_id[5]).click(function(event){
-    if (box_state[5] == false){
-      $(box_id[5]).css( "background-color", 'lightblue' );
-      box_state[5] = true;}
-    else{ 
-      $(box_id[5]).css( "background-color", 'black' );
-      box_state[5] = false;}
-    });
-$(box_id[6]).click(function(event){
-    if (box_state[6] == false){
-      $(box_id[6]).css( "background-color", 'lightblue' );
-      box_state[6] = true;}
-    else{ 
-      $(box_id[6]).css( "background-color", 'black' );
-      box_state[6] = false;}
-    });
-$(box_id[7]).click(function(event){
-    if (box_state[7] == false){
-      $(box_id[7]).css( "background-color", 'lightblue' );
-      box_state[7] = true;}
-    else{ 
-      $(box_id[7]).css( "background-color", 'black' );
-      box_state[7] = false;}
-    });
-$(box_id[8]).click(function(event){
-    if (box_state[8] == false){
-      $(box_id[8]).css( "background-color", 'lightblue' );
-      box_state[8] = true;}
-    else{ 
-      $(box_id[8]).css( "background-color", 'black' );
-      box_state[8] = false;}
-    });
-    */
-
   new_game(); //게임 초기화
   ready();//배열에 값 입력 및 정답 확인 
 
-  rotate();
-        
-      
 
-       
+        
+    
 
   
   
