@@ -11,8 +11,6 @@
 #outline{
 	border: solid 1px red;
 }
-
-
 #puzzle span {
  border : solid 1px blue;
   background-color: black;
@@ -33,10 +31,12 @@
  
 }
 
-
-#a, #puzzle #b{
+/* #puzzle #a {
  background-color: yellow;
-}  
+}
+#b{
+ background-color: yellow;
+} */
 </style>
 
 
@@ -46,9 +46,12 @@
 <body>
 <div id=outline>
 	<div id=puzzle>
-		<span id=a></span><span id=b></span><span id=c></span>
-		<span id=d></span><span id=e></span><span id=f></span>
-		<span id=g></span><span id=h></span><span id=i></span>
+		<span id='a'></span><span id='b'></span><span id='c'></span>
+		<span id='d'></span><span id='e'></span><span id='f'></span>
+		<span id='g'></span><span id='h'></span><span id='i'></span>
+	</div>
+	<div>
+		<input id="game_state">
 	</div>
 	<div>
 		<button id=start_game>start</button>
@@ -56,8 +59,6 @@
 		<button id=next_game>next</button>
 	</div>
 </div>
-
-
 
 
 <script>
@@ -68,51 +69,43 @@
 //와일문으로 3개 이상 찰 때 까지
 
 var box_data = []; // box의 상태를 저장하기 위한 배열. 일단 true,false로 저장한다.
+var box_state = []; // 현재 선택된 박스의 상태
+var box_id = []; // 반복문을 위해 box id를 넣어둔 배열, 
 var g_round = 0; // 스테이지 번호.. 난이도를 조정할지 생각중
 var g_score = 0; // 맞출때, 틀릴때, 클리어시 점수를 낼것.. 
 var g_timer = 0; // 시간 제한을 둘까?
-var box_state = [false, false, false, false, false, false, false, false, false];
- 
- 
- function flipCard(stateArr){
-	 window.setTimeout(function(){
 
-		for (var i in box_data){
-			box_state[i] = box_data[i];
-		     if (box_data[i] == true){
-		         
-		         $('box').css( "background-color", 'blue' );
-		       } 
-		}
-
-		$('box1').css( "background-color", 'blue' );
-
-		
-	}, 3000);
-}
-		
-
- 
-
- 
 function new_game(){ // 초기화 작업
+	for(var i=0; i<9; i++){
+		box_state[i] = 'false'; // 일단 뒤집어진 상태로 저장
+		if (parseInt(Math.random()*2)){ // 답 저장
+			box_data[i] = 'true';
+		}	else {
+			box_data[i] = 'false';
+		}
+	}
 	g_round = 0;
 	g_score = 0;
 	g_timer = 0;
 }
-function ready(){ //  배열에 랜덤하게 t/f값 삽입 //한번씩 뒤집어서 확인 시켜줄것. 준비,시작 메세지 출력?
+function ready(){ //한번씩 뒤집어서 확인 시켜줄것. 준비,시작 메세지 출력?
 	for(var i=0; i<9; i++){
-		if (parseInt(Math.random()*2)){
-			box_data[i] = 'true';
-			//console.log('true');
-		}	else {
-			box_data[i] = 'false';
-			//console.log('false');
-		}
+		if(box_data[i] == 'true'){ // 저장된 답이 true 일 경우
+			change_color(i);
+		}	
 	}
+	window.setTimeout(function(){
+		console.log("게임 준비 완료");
+	}, 3000); 
 }
-function game_over(){ //게임 종료, 초기화, 메인 화면으로..? 
+function game_over(){ //게임 종료.졌다고 메세지 출력.시작으로 돌아감 
 	
+}
+function change_color(i){
+	box_id[i].style.backgroundColor = "#ff0000";
+	window.setTimeout(function(){
+		box_id[i].style.backgroundColor = "#000000";
+	}, 2000);
 }
 
 function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남아있음
@@ -135,43 +128,40 @@ function box_click(select){ // 박스 선택시. 배열과 비교하여 맞췄�
 	}
 };
 
-var box0 = document.getElementById('a');
-var box1 = document.getElementById('b');
-var box2 = document.getElementById('c');
-var box3 = document.getElementById('d');
-var box4 = document.getElementById('e');
-var box5 = document.getElementById('f');
-var box6 = document.getElementById('g');
-var box7 = document.getElementById('h');
-var box8 = document.getElementById('i');
+var box1 = document.getElementById('a');
+var box2 = document.getElementById('b');
+var box3 = document.getElementById('c');
+var box4 = document.getElementById('d');
+var box5 = document.getElementById('e');
+var box6 = document.getElementById('f');
+var box7 = document.getElementById('g');
+var box8 = document.getElementById('h');
+var box9 = document.getElementById('i');
 
-box0.onclick = function(){	box_click(box_data[0]);}
-box1.onclick = function(){	box_click(box_data[1]);}
-box2.onclick = function(){	box_click(box_data[2]);}
-box3.onclick = function(){	box_click(box_data[3]);}
-box4.onclick = function(){	box_click(box_data[4]);}
-box5.onclick = function(){	box_click(box_data[5]);}
-box6.onclick = function(){	box_click(box_data[6]);}
-box7.onclick = function(){	box_click(box_data[7]);}
-box8.onclick = function(){	box_click(box_data[8]);} 
+box_id = [box1,box2,box3,box4,box5,box6,box7,box8,box9];
+
+box1.onclick = function(){	box_click(box_data[0]);}
+box2.onclick = function(){	box_click(box_data[1]);}
+box3.onclick = function(){	box_click(box_data[2]);}
+box4.onclick = function(){	box_click(box_data[3]);}
+box5.onclick = function(){	box_click(box_data[4]);}
+box6.onclick = function(){	box_click(box_data[5]);}
+box7.onclick = function(){	box_click(box_data[6]);}
+box8.onclick = function(){	box_click(box_data[7]);}
+box9.onclick = function(){	box_click(box_data[8]);}
 
 /*
 window.setTimeout(function(){
-	rotate(); // 3초 후 회전 // while 문에 넣어 지속적으로 돌릴것.//각도 문제 해결안됨
+	
 }, 3000); 
 */
 
 
 	new_game(); //게임 초기화
 	ready();//배열에 값 입력 및 정답 확인
-	flipCard(box_data);
 
 
-/*
-for(var i=0;i<9;i++){
-	console.log(box_data[i]+"--"); //배열에 t/f값이 재대로 들어가는지 확인// 완료
-}
-*/
+
 </script>
 </body>
 </html>
