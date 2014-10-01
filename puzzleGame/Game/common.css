@@ -2,23 +2,9 @@
 
 @CHARSET "UTF-8";
 
-input[type="text"] {
-    color: #888;
-    width: 20%;
-    padding: 0px 0px 0px 5px;
-    border: 1px solid #C5E2FF;
-    background: #FBFBFB;
-    outline: 0;
-    -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
-    box-shadow: inset 0px 1px 6px #ECF3F5;
-    font: 200 12px/25px Arial, Helvetica, sans-serif;
-    height: 30px;
-    line-height:15px;
-    margin: 2px 6px 16px 0px;
-}
 textarea {
     color: #888;
-    width: 100%;
+    width: 66%;
     padding: 0px 0px 0px 5px;
     border: 1px solid #C5E2FF;
     background: #FBFBFB;
@@ -26,7 +12,7 @@ textarea {
     -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
     box-shadow: inset 0px 1px 6px #ECF3F5;
     font: 200 12px/25px Arial, Helvetica, sans-serif;
-    height: 100%;
+    height: 180px;
     line-height:15px;
     margin: 2px 6px 16px 0px;
 }
@@ -48,16 +34,17 @@ body {
   background: cadetblue url('bg.gif');
   background-repeat: repeat-x;
   margin: 0; 
+  border: solid 3px white; 
 }
 
 
 #outline{
-  border: dashed 1px blue; 
+
 }
 #puzzleTop span {
- border : dashed 1px blue;
+
   background-color: black;
-  float:left;
+  float:right;
   margin: 5px;
   overflow: hidden;
    padding: 100px 0 0 0;
@@ -66,32 +53,30 @@ body {
 }
 
  #puzzleTop {
- position: absolute;
+  position: absolute;
  right:450px;
- 
- border : dashed 1px blue;
  height : 339px;
  width : 339px;
- margin: 0 auto;
+
  
 }
 #rightTop{
-	border: dashed 1px blue; 
+	
 }
 
 
 #rightBot {
-	border: dashed 1px blue; 
+	
   position: absolute;
-  right: 200px;
-  top: 30px;
+  right: 270px;
+  top: 148px;
 
 
 }
 #leftBot {
-	border: dashed 1px blue; 
+	
   position: absolute;
-  right: 450px;
+  right: 590px;
   top: 350px;
 
 
