@@ -2,7 +2,7 @@
 
 @CHARSET "UTF-8";
 
-textarea {
+textarea, input{
     color: #888;
     width: 66%;
     padding: 0px 0px 0px 5px;
@@ -61,7 +61,16 @@ body {
  
 }
 #rightTop{
-	
+	position: absolute;
+  right: 368px;
+  top: 30px;
+
+}
+
+#count_state{
+	font-size:72px;
+  width: 50px;
+  height: 80px;
 }
 
 
