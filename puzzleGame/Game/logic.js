@@ -51,6 +51,7 @@ function clear_game(){// 클리어. 다시하기
 	select_box = 0; 
 	result_box = 0;
 	console.log("클리어");
+	$('#game_state').val($('#game_state').val()+"맞췄습니다");
 	
 	
 	
