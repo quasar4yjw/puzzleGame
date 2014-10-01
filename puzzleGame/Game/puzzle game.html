@@ -131,7 +131,7 @@ function change_color(i){
   box_id[i].style.backgroundColor = "#ff0000";
   window.setTimeout(function(){
     box_id[i].style.backgroundColor = "#000000";
-  }, 2000);
+  }, 500);
 }
 
 function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남아있음
@@ -271,7 +271,7 @@ $(box_id[8]).click(function(event){
   new_game(); //게임 초기화
   ready();//배열에 값 입력 및 정답 확인 
 
-        
+  rotate();
         
       
 
