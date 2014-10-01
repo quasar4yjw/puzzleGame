@@ -50,12 +50,15 @@
 		<span id='d'></span><span id='e'></span><span id='f'></span>
 		<span id='g'></span><span id='h'></span><span id='i'></span>
 	</div>
-	<div>
-		<input id="game_state">
-	</div>
+	
 	<div>
 		<button id=start_game>start</button>
-
+		<button id=next_game>next</button>
+	</div>
+</div>
+<div >
+	<div>
+		<textarea id=game_state rows="20" cols="20"></textarea>
 	</div>
 </div>
 
@@ -64,8 +67,6 @@
 
 
 
-
-//와일문으로 3개 이상 찰 때 까지
 
 var box_data = []; // box의 상태를 저장하기 위한 배열. 일단 true,false로 저장한다.
 var box_state = []; // 현재 선택된 박스의 상태
@@ -81,27 +82,33 @@ var result_box = 0; // 현재 선택된 박스중 true 갯수
 
 function new_game(){ // 초기화 작업
 	for(var i=0; i<9; i++){
-		box_state[i] = false; // 일단 뒤집어진 상태로 저장
+		//초기화
+		box_id[i].style.backgroundColor = "#000000"; // 현재 색상 모두 검정
+		box_state[i] = false; // 현재 상태 모두 뒷면
 		
+		//각 배열에 정답이 될 값 저장
 		if (parseInt(Math.random()*2)){ // 답 저장
 			box_data[i] = 'true';
 			result++;
 		}	else {
 			box_data[i] = 'false';
 		}
-	}
-	console.log("해당 스테이지의 true 겟수 : "+result);
-}
-function ready(){ //한번씩 뒤집어서 확인 시켜줄것. 준비,시작 메세지 출력?//new 하고 같이 해도 될듯
-	for(var i=0; i<9; i++){
+		
 		if(box_data[i] == 'true'){ // 저장된 답이 true 일 경우
 			change_color(i);
 		}	
 	}
+	console.log("해당 스테이지의 true 겟수 : "+result);
+	
+	//시작 전 정답 공개
+	/* for(var i=0; i<9; i++){
+		
+	} */
 	window.setTimeout(function(){
 		console.log("게임 준비 완료");
 	}, 3000); 
 }
+
 
 
 function clear_game(){// 클리어. 다시하기
@@ -110,14 +117,21 @@ function clear_game(){// 클리어. 다시하기
 	result_box = 0;
 	console.log("클리어");
 	
-	start_game.onclick= function(){new_game();ready();rotate();};//버튼 선택시 새게임
+	
+	
+	var appendText = document.createTextNode("스테이지 클리어\n"); 
+
+	state_area.appendChild(appendText); 
+
+	
+	start_game.onclick= function(){new_game();};//버튼 선택시 새게임
 }
 function change_color(i){
 	window.setTimeout(function(){
-		box_id[i].style.backgroundColor = "#ff0000";
+		box_id[i].style.backgroundColor = "#ff0000";// 빨강
 	}, 1000);
 	window.setTimeout(function(){
-		box_id[i].style.backgroundColor = "#000000";
+		box_id[i].style.backgroundColor = "#000000";// 검정
 	}, 2000);
 }
 
@@ -142,11 +156,9 @@ function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남
 	  },'linear');
 }
 
-
 function box_click(select , value){ // 박스 선택시. 배열과 비교하여 맞췄는지 확인
 
-	
-	 if (box_state[value] == false){ 
+	 if (box_state[value] == false){ // 박스가 뒤집힌 상태인지 아닌지 확인.
        $(box_id[value]).css( "background-color", 'lightblue' );
        select_box++; //현재 선택된 박스 갯수
        box_state[value] = true;
@@ -178,12 +190,12 @@ var box6 = document.getElementById('g');
 var box7 = document.getElementById('h');
 var box8 = document.getElementById('i');
 
-var input_box = document.getElementById('game_state');
+var state_area = document.getElementById('game_state');
 var start_game = document.getElementById('start_game');
 
 box_id = [box0,box1,box2,box3,box4,box5,box6,box7,box8]; //배열에 id 저장
 
-//box_data[]의 값은 : 정답 여부 t/f
+//box_data[]의 값은 t/f.. 해당 박스의 정답 여부
 box0.onclick = function(){	box_click(box_data[0],0);}
 box1.onclick = function(){	box_click(box_data[1],1);}
 box2.onclick = function(){	box_click(box_data[2],2);}
@@ -200,15 +212,8 @@ window.setTimeout(function(){
 }, 3000); //딜레이를 주기위해
 */
 
+	new_game(); //게임 초기화 
 
-
-	new_game(); //게임 초기화
-	ready();//배열에 값 입력 및 정답 확인
-	
-	window.setTimeout(function(){
-	rotate();
-	}, 3000); //딜레이를 주기위해
-	
 
 
 </script>
