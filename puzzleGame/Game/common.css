@@ -6,7 +6,7 @@ textarea, input{
     color: #888;
     width: 66%;
     padding: 0px 0px 0px 5px;
-    border: 1px solid #C5E2FF;
+    border: 1px solid RoyalBlue;
     background: #FBFBFB;
     outline: 0;
     -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
@@ -19,7 +19,7 @@ textarea, input{
 
 button{
     padding: 10px 30px 10px 30px;
-    background: #66C1E4;
+    background: RoyalBlue;
     border: none;
     color: #FFF;
     box-shadow: 1px 1px 1px #4C6E91;
@@ -43,7 +43,7 @@ body {
 }
 #puzzleTop span {
 
-  background-color: black;
+  background-color: RoyalBlue;
   float:right;
   margin: 5px;
   overflow: hidden;

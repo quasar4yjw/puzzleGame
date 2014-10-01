@@ -63,7 +63,7 @@ function clear_game(){// 클리어. 다시하기
 }
 function change_color(i){
 	window.setTimeout(function(){
-		box_id[i].style.backgroundColor = "#ff0000";// 빨강
+		box_id[i].style.backgroundColor = "RoyalBlue";// 빨강
 	}, 1000);
 	window.setTimeout(function(){
 		box_id[i].style.backgroundColor = "#000000";// 검정
@@ -94,7 +94,7 @@ function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남
 function box_click(select , value){ // 박스 선택시. 배열과 비교하여 맞췄는지 확인
 
 	 if (box_state[value] == false){ // 박스가 뒤집힌 상태인지 아닌지 확인.
-       $(box_id[value]).css( "background-color", 'lightblue' );
+       $(box_id[value]).css( "background-color", 'RoyalBlue' );
        select_box++; //현재 선택된 박스 갯수
        box_state[value] = true;
        if(select == 'true') // 선택된 것이 true 일경우
