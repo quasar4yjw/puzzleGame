@@ -5,7 +5,7 @@
 textarea, input{
 	  font: 200 25px Hanna, Helvetica, sans-serif;
     color: MidnightBlue;
-    width: 28%;
+    width: 43%;
     padding: 0px 0px 0px 5px;
     border: 1px solid RoyalBlue;
     background: #FBFBFB;
@@ -15,6 +15,7 @@ textarea, input{
     height: 180px;
     line-height:15px;
     margin: 2px 6px 16px 0px;
+    border-radius: 11px;
 }
 
 button{
@@ -26,13 +27,19 @@ button{
     -webkit-box-shadow: 1px 1px 1px #4C6E91;
     -moz-box-shadow: 1px 1px 1px #4C6E91;
     text-shadow: 1px 1px 1px #5079A3;
+    width: 200px;
+    height: 100px;
+    border-radius: 11px;
+    font: 36px Hanna, Helvetica, sans-serif;
+    
 }
 
 body { 
   background: cadetblue url('bg.gif');
   background-repeat: repeat-x;
   margin: 0; 
-  border: solid 3px white; 
+ 
+  
 }
 
 #outline{
@@ -51,14 +58,15 @@ body {
 
  #puzzleTop {
   position: absolute;
+ top : 70px;
  right:450px;
- height : 339px;
- width : 339px;
+ height : 330px;
+ width : 330px;
 }
 #rightTop{
 	position: absolute;
   right: 372px;
-  top: 30px;
+  top: 93px;
 
 }
 
@@ -72,11 +80,11 @@ body {
 	
   position: absolute;
   right: -13px;
-  top: 148px;
+  top: 212px;
 }
 #leftBot {
 	
   position: absolute;
-  right: 590px;
-  top: 350px;
+  right: 575px;
+  top: 420px;
 }

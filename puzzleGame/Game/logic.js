@@ -10,7 +10,9 @@ var count; // 제한시간용 변수
 var g_count;
 
 function new_game(){ // 초기화 작업
-	
+    $('#puzzleTop').css('-webkit-transform',''); 
+    $('#puzzleTop').css('-moz-transform','');
+	$('#puzzleTop').css('transform', '');
 	count = 5;//한판당 제한시간 5초
 	result = 0; 
 	select_box = 0; 
@@ -38,13 +40,14 @@ function new_game(){ // 초기화 작업
 		console.log("게임 준비 완료");
 		stage_timer();//-----------------------타이머-------------
 		//rotate();
+		rotateCell($('#puzzleTop'));
 	}, 3000); 
 }
 
 function clear_game(){// 클리어. 다시하기
 	
 	console.log("클리어");
-	$('#game_state').val($('#game_state').val()+"\n맞췄습니다\n");
+	$('#game_state').val($('#game_state').val()+"\n오호라? 맞췄네!\n");
 
 	var appendText = document.createTextNode("스테이지 클리어\n"); 
 	state_area.appendChild(appendText); 
@@ -73,16 +76,31 @@ function stage_timer(){
 
 //-----------------------------------------------------
 
-function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남아있음
-	$('#puzzleTop').animate({  borderSpacing: -90 }, {
+function rotateCell(element){
+	
+	
+	element.animate({  borderSpacing: -90 }, {
 	      step: function(now,fx) {
-	        $(this).css('-webkit-transform','rotate('+now+'deg)'); 
-	        $(this).css('-moz-transform','rotate('+now+'deg)');
-	        $(this).css('transform','rotate('+now+'deg)');
+	        $('#puzzleTop').css('-webkit-transform','rotate('+(now)+'deg)'); 
+	        $('#puzzleTop').css('-moz-transform','rotate('+(now)+'deg)');
+	        $('#puzzleTop').css('transform','rotate('+(now)+'deg)');
+	        
 	        //console.log(now); //각도 출력
 	      },
 	      duration:'low'
 	  },'linear');
+	window.setTimeout(function(){
+	 element.animate({  borderSpacing: -90 }, {
+	      step: function(now,fx) {
+	        $('#puzzleTop').css('-webkit-transform','rotate('+(now-90)+'deg)'); 
+	        $('#puzzleTop').css('-moz-transform','rotate('+(now-90)+'deg)');
+	        $('#puzzleTop').css('transform','rotate('+(now-90)+'deg)');
+	        //console.log(now); //각도 출력
+	       
+	      },
+	      duration:'low'
+	  },'linear'); }, 500); 
+
 }
 
 function box_click(select , value){ // 박스 선택시. 배열과 비교하여 맞췄는지 확인
