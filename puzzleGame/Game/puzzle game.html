@@ -9,7 +9,7 @@
 
 <style>
 #outline{
-  border: solid 1px red;
+	border: solid 1px red;
 }
 #puzzle span {
  border : solid 1px blue;
@@ -29,10 +29,7 @@
  width : 339px;
  margin: 0 auto;
  
-
 }
-
-
 
 /* #puzzle #a {
  background-color: yellow;
@@ -48,19 +45,18 @@
 </head>
 <body>
 <div id=outline>
-  <div id=puzzle>
-    <span id='a'></span><span id='b'></span><span id='c'></span>
-    <span id='d'></span><span id='e'></span><span id='f'></span>
-    <span id='g'></span><span id='h'></span><span id='i'></span>
-  </div>
-  <div>
-    <input id="game_state">
-  </div>
-  <div>
-    <button id=start_game>start</button>
-    <button id=reset_game>reset</button>
-    <button id=next_game>next</button>
-  </div>
+	<div id=puzzle>
+		<span id='a'></span><span id='b'></span><span id='c'></span>
+		<span id='d'></span><span id='e'></span><span id='f'></span>
+		<span id='g'></span><span id='h'></span><span id='i'></span>
+	</div>
+	<div>
+		<input id="game_state">
+	</div>
+	<div>
+		<button id=start_game>start</button>
+
+	</div>
 </div>
 
 
@@ -72,112 +68,104 @@
 //와일문으로 3개 이상 찰 때 까지
 
 var box_data = []; // box의 상태를 저장하기 위한 배열. 일단 true,false로 저장한다.
-var box_state = [false, false, false, false, false, false, false, false, false]; // 현재 선택된 박스의 상태
+var box_state = []; // 현재 선택된 박스의 상태
 var box_id = []; // 반복문을 위해 box id를 넣어둔 배열, 
-var g_round = 0; // 스테이지 번호.. 난이도를 조정할지 생각중
+
+/* var g_round = 0; // 스테이지 번호.. 난이도를 조정할지 생각중
 var g_score = 0; // 맞출때, 틀릴때, 클리어시 점수를 낼것.. 
-var g_timer = 0; // 시간 제한을 둘까?
+var g_timer = 0; // 시간 제한을 둘까? */
+
+var result = 0; // 현재 스테이지 true의 갯수
+var select_box = 0; // 현재 선택한 박스 겟수
+var result_box = 0; // 현재 선택된 박스중 true 갯수
 
 function new_game(){ // 초기화 작업
-  for(var i=0; i<9; i++){
-    box_state[i] = false; // 일단 뒤집어진 상태로 저장
-    if (parseInt(Math.random()*2)){ // 답 저장
-      box_data[i] = 'true';
-    } else {
-      box_data[i] = 'false';
-    }
-  }
-  g_round = 0;
-  g_score = 0;
-  g_timer = 0;
+	for(var i=0; i<9; i++){
+		box_state[i] = false; // 일단 뒤집어진 상태로 저장
+		
+		if (parseInt(Math.random()*2)){ // 답 저장
+			box_data[i] = 'true';
+			result++;
+		}	else {
+			box_data[i] = 'false';
+		}
+	}
+	console.log("해당 스테이지의 true 겟수 : "+result);
 }
-function ready(){ //한번씩 뒤집어서 확인 시켜줄것. 준비,시작 메세지 출력?
-  for(var i=0; i<9; i++){
-    if(box_data[i] == 'true'){ // 저장된 답이 true 일 경우
-      change_color(i);
-    } 
-  }
-  window.setTimeout(function(){
-    rotate();
-    console.log("게임 준비 완료");
-  }, 1000); 
-}
-function game_over(){ //게임 종료.졌다고 메세지 출력.시작으로 돌아감 
-  
+function ready(){ //한번씩 뒤집어서 확인 시켜줄것. 준비,시작 메세지 출력?//new 하고 같이 해도 될듯
+	for(var i=0; i<9; i++){
+		if(box_data[i] == 'true'){ // 저장된 답이 true 일 경우
+			change_color(i);
+		}	
+	}
+	window.setTimeout(function(){
+		console.log("게임 준비 완료");
+	}, 3000); 
 }
 
 
-
-
-/* function flipCard(stateArr){
-     window.setTimeout(function(){
-
-      for (var i in box_data){
-        box_state[i] = box_data[i];
-           if (box_data[i] == true){
-               
-               $(box_id[i]).css( "background-color", 'blue' );
-             } 
-      }
-
-      $('box1').css( "background-color", 'blue' );
-
-      
-    }, 3000);
-  }
-       */
-
-
-
-
-
+function clear_game(){// 클리어. 다시하기
+	result = 0; 
+	select_box = 0; 
+	result_box = 0;
+	console.log("클리어");
+	
+	start_game.onclick= function(){new_game();ready();rotate();};//버튼 선택시 새게임
+}
 function change_color(i){
-  box_id[i].style.backgroundColor = "#ff0000";
-  window.setTimeout(function(){
-    box_id[i].style.backgroundColor = "#000000";
-    
-  
-  }, 700);
+	window.setTimeout(function(){
+		box_id[i].style.backgroundColor = "#ff0000";
+	}, 1000);
+	window.setTimeout(function(){
+		box_id[i].style.backgroundColor = "#000000";
+	}, 2000);
 }
 
 function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남아있음
-  $('#puzzle').animate({  borderSpacing: -90 }, {
-      step: function(now,fx) {
-        $(this).css('-webkit-transform','rotate('+now+'deg)'); 
-        $(this).css('-moz-transform','rotate('+now+'deg)');
-        $(this).css('transform','rotate('+now+'deg)');
-        //console.log(now); //각도 출력
-      },
-      duration:'low'
-  },'linear');
-  $('#puzzle').animate({  borderSpacing: -90 }, {
-      step: function(now,fx) {
-        $(this).css('-webkit-transform','rotate('+(now-90)+'deg)'); 
-        $(this).css('-moz-transform','rotate('+(now-90)+'deg)');
-        $(this).css('transform','rotate('+(now-90)+'deg)');
-        //console.log(now); //각도 출력
-      },
-      duration:'low'
-  },'linear');
+	$('#puzzle').animate({  borderSpacing: -90 }, {
+	      step: function(now,fx) {
+	        $(this).css('-webkit-transform','rotate('+now+'deg)'); 
+	        $(this).css('-moz-transform','rotate('+now+'deg)');
+	        $(this).css('transform','rotate('+now+'deg)');
+	        //console.log(now); //각도 출력
+	      },
+	      duration:'low'
+	  },'linear');
+	  $('#puzzle').animate({  borderSpacing: -90 }, {
+	      step: function(now,fx) {
+	        $(this).css('-webkit-transform','rotate('+(now-90)+'deg)'); 
+	        $(this).css('-moz-transform','rotate('+(now-90)+'deg)');
+	        $(this).css('transform','rotate('+(now-90)+'deg)');
+	        //console.log(now); //각도 출력
+	      },
+	      duration:'low'
+	  },'linear');
 }
 
-function box_click(select, value){
-  
 
-      if (box_state[value] == false){
-        $(box_id[value]).css( "background-color", 'lightblue' );
-        box_state[value] = true;}
-      else{ 
-        $(box_id[value]).css( "background-color", 'black' );
-        box_state[value] = false;}
-      
+function box_click(select , value){ // 박스 선택시. 배열과 비교하여 맞췄는지 확인
 
-  // 박스 선택시. 배열과 비교하여 맞췄는지 확인
-  if(select == 'true'){
-     console.log("true"); // 맞췄을 경우.. 뒤집어서 색상을 변경할수 있도록 한다.
-  } else{
-     console.log("false");// 틀렸을 경우.. 뭘 할지 생각중..
-  }
+	
+	 if (box_state[value] == false){ 
+       $(box_id[value]).css( "background-color", 'lightblue' );
+       select_box++; //현재 선택된 박스 갯수
+       box_state[value] = true;
+       if(select == 'true') // 선택된 것이 true 일경우
+    	   result_box++; // 정답수 ++
+       }
+    else{ 
+       $(box_id[value]).css( "background-color", 'black' );
+       select_box--; // 선택 취소된 박스 갯수
+       box_state[value] = false;
+       if(select == 'true') 
+    	   result_box--; // 정답이래도 선택 취소했으므로 --
+       }
+       
+	 if(result_box == select_box && result_box == result){//result_box == select_box && 
+			console.log("총 선택된 박스 수: "+select_box+", 선택된 정답 수 : "+result_box);
+			clear_game();
+		}
+	
 };
 
 var box0 = document.getElementById('a');
@@ -190,53 +178,38 @@ var box6 = document.getElementById('g');
 var box7 = document.getElementById('h');
 var box8 = document.getElementById('i');
 
-box_id = [box0,box1,box2,box3,box4,box5,box6,box7,box8];
+var input_box = document.getElementById('game_state');
+var start_game = document.getElementById('start_game');
 
-box0.onclick = function(){  box_click(box_data[0], 0);}
-box1.onclick = function(){  box_click(box_data[1], 1);}
-box2.onclick = function(){  box_click(box_data[2], 2);}
-box3.onclick = function(){  box_click(box_data[3], 3);}
-box4.onclick = function(){  box_click(box_data[4], 4);}
-box5.onclick = function(){  box_click(box_data[5], 5);}
-box6.onclick = function(){  box_click(box_data[6], 6);}
-box7.onclick = function(){  box_click(box_data[7], 7);}
-box8.onclick = function(){  box_click(box_data[8], 8);}
+box_id = [box0,box1,box2,box3,box4,box5,box6,box7,box8]; //배열에 id 저장
+
+//box_data[]의 값은 : 정답 여부 t/f
+box0.onclick = function(){	box_click(box_data[0],0);}
+box1.onclick = function(){	box_click(box_data[1],1);}
+box2.onclick = function(){	box_click(box_data[2],2);}
+box3.onclick = function(){	box_click(box_data[3],3);}
+box4.onclick = function(){	box_click(box_data[4],4);}
+box5.onclick = function(){	box_click(box_data[5],5);}
+box6.onclick = function(){	box_click(box_data[6],6);}
+box7.onclick = function(){	box_click(box_data[7],7);}
+box8.onclick = function(){	box_click(box_data[8],8);}
 
 /*
 window.setTimeout(function(){
-  
-}, 3000); */
+	
+}, 3000); //딜레이를 주기위해
+*/
 
 
-  new_game(); //게임 초기화
-  ready();//배열에 값 입력 및 정답 확인 
 
+	new_game(); //게임 초기화
+	ready();//배열에 값 입력 및 정답 확인
+	
+	window.setTimeout(function(){
+	rotate();
+	}, 3000); //딜레이를 주기위해
+	
 
-        
-    
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-/*   function clickCard(){
-     click.()
-     
-   }  */
-  
-  
 
 </script>
 </body>
