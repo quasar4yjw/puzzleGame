@@ -26,9 +26,7 @@ button{
     -webkit-box-shadow: 1px 1px 1px #4C6E91;
     -moz-box-shadow: 1px 1px 1px #4C6E91;
     text-shadow: 1px 1px 1px #5079A3;
-    
 }
-
 
 body { 
   background: cadetblue url('bg.gif');
@@ -36,7 +34,6 @@ body {
   margin: 0; 
   border: solid 3px white; 
 }
-
 
 #outline{
 
@@ -57,8 +54,6 @@ body {
  right:450px;
  height : 339px;
  width : 339px;
-
- 
 }
 #rightTop{
 	position: absolute;
@@ -73,27 +68,15 @@ body {
   height: 80px;
 }
 
-
 #rightBot {
 	
   position: absolute;
   right: -13px;
   top: 148px;
-
-
 }
 #leftBot {
 	
   position: absolute;
   right: 590px;
   top: 350px;
-
-
 }
-
-/* #puzzle #a {
- background-color: yellow;
-}
-#b{
- background-color: yellow;
-} */

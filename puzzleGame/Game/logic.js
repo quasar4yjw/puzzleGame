@@ -1,15 +1,7 @@
 
-
-
-
-
 var box_data = []; // box의 상태를 저장하기 위한 배열. 일단 true,false로 저장한다.
 var box_state = []; // 현재 선택된 박스의 상태
 var box_id = []; // 반복문을 위해 box id를 넣어둔 배열, 
-
-/* var g_round = 0; // 스테이지 번호.. 난이도를 조정할지 생각중
-var g_score = 0; // 맞출때, 틀릴때, 클리어시 점수를 낼것.. 
-var g_timer = 0; // 시간 제한을 둘까? */
 
 var result = 0; // 현재 스테이지 true의 갯수
 var select_box = 0; // 현재 선택한 박스 겟수
@@ -29,24 +21,17 @@ function new_game(){ // 초기화 작업
 		}	else {
 			box_data[i] = 'false';
 		}
-		
 		if(box_data[i] == 'true'){ // 저장된 답이 true 일 경우
 			change_color(i);
 		}	
 	}
 	console.log("해당 스테이지의 true 겟수 : "+result);
 	
-	//시작 전 정답 공개
-	/* for(var i=0; i<9; i++){
-		
-	} */
 	window.setTimeout(function(){
 		console.log("게임 준비 완료");
-		rotate();
+		//rotate();
 	}, 3000); 
 }
-
-
 
 function clear_game(){// 클리어. 다시하기
 	result = 0; 
@@ -54,15 +39,10 @@ function clear_game(){// 클리어. 다시하기
 	result_box = 0;
 	console.log("클리어");
 	$('#game_state').val($('#game_state').val()+"\n맞췄습니다\n");
-	
-	
-	
-	var appendText = document.createTextNode("스테이지 클리어\n"); 
 
+	var appendText = document.createTextNode("스테이지 클리어\n"); 
 	state_area.appendChild(appendText); 
 
-	
-	start_game.onclick= function(){new_game();};//버튼 선택시 새게임
 }
 function change_color(i){
 	window.setTimeout(function(){
@@ -83,15 +63,6 @@ function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남
 	      },
 	      duration:'low'
 	  },'linear');
-/*	  $('#puzzleTop').animate({  borderSpacing: -90 }, {
-	      step: function(now,fx) {
-	        $(this).css('-webkit-transform','rotate('+(now-90)+'deg)'); 
-	        $(this).css('-moz-transform','rotate('+(now-90)+'deg)');
-	        $(this).css('transform','rotate('+(now-90)+'deg)');
-	        //console.log(now); //각도 출력
-	      },
-	      duration:'low'
-	  },'linear');*/
 }
 
 function box_click(select , value){ // 박스 선택시. 배열과 비교하여 맞췄는지 확인
@@ -115,7 +86,6 @@ function box_click(select , value){ // 박스 선택시. 배열과 비교하여 
 			console.log("총 선택된 박스 수: "+select_box+", 선택된 정답 수 : "+result_box);
 			clear_game();
 		}
-	
 };
 
 var box0 = document.getElementById('a');
@@ -144,13 +114,7 @@ box6.onclick = function(){	box_click(box_data[6],6);}
 box7.onclick = function(){	box_click(box_data[7],7);}
 box8.onclick = function(){	box_click(box_data[8],8);}
 
-/*
-window.setTimeout(function(){
-	
-}, 3000); //딜레이를 주기위해
-*/
 
-	new_game(); //게임 초기화 
-
+	start_game.onclick= function(){new_game();};//버튼 선택시 새게임
 
 

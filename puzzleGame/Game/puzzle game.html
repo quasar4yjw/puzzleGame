@@ -9,57 +9,42 @@
 <link href="common.css" rel="stylesheet" type="text/css">
 
 
-
-
-
 </head>
 <body>
 
-
-
-
 <div id=outline>
-<form>
-<table>
-<tr>
-<td>
-<div id='leftUI'>
+	<form>
+		<table>
+			<tr>
+			<td>
+				<div id='leftUI'>
 
-<div id='puzzleTop'>
+				<div id='puzzleTop'>
   
-    <span id='a'></span><span id='b'></span><span id='c'></span>
-    <span id='d'></span><span id='e'></span><span id='f'></span>
-    <span id='g'></span><span id='h'></span><span id='i'></span>
+   				 <span id='a'></span><span id='b'></span><span id='c'></span>
+   				 <span id='d'></span><span id='e'></span><span id='f'></span>
+   				 <span id='g'></span><span id='h'></span><span id='i'></span>
  
+				</div>
+
+				<div id='leftBot'>
+ 				 <button id=start_game type=button>start</button>
+			    <button id=next_game type=button>next</button>
+				</div>
+
+			 </div>
+			</td>
+
+			<td>
+				<div id='rightUI'>
+				<div id='rightTop'><input readonly='' type=text id=count_state></div>
+				<div id='rightBot'><textarea readonly='' id=game_state></textarea></div>
+			</div>
+		</td>
+		</tr>
+	 </table>
+   </form>
 </div>
-
-<div id='leftBot'>
-    <button id=start_game type=button>start</button>
-    <button id=next_game type=button>next</button>
-</div>
-
-</div>
-</td>
-
-
-
-
-<td>
-<div id='rightUI'>
-<div id='rightTop'><input readonly='' type=text id=count_state></div>
-<div id='rightBot'><textarea readonly='' id=game_state></textarea></div>
-</div>
-</td>
-</tr>
-</table>
-</form>
-</div>
-
-
-
-
-
-
 
 
 <script src=logic.js></script>
