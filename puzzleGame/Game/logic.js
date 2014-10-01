@@ -6,9 +6,16 @@ var box_id = []; // 반복문을 위해 box id를 넣어둔 배열,
 var result = 0; // 현재 스테이지 true의 갯수
 var select_box = 0; // 현재 선택한 박스 겟수
 var result_box = 0; // 현재 선택된 박스중 true 갯수
-var fun = 90;
+var count; // 제한시간용 변수
+var g_count;
 
 function new_game(){ // 초기화 작업
+	
+	count = 5;//한판당 제한시간 5초
+	result = 0; 
+	select_box = 0; 
+	result_box = 0;
+	
 	for(var i=0; i<9; i++){
 		//초기화
 		box_id[i].style.backgroundColor = "RoyalBlue"; // 현재 색상 모두 검정
@@ -29,14 +36,13 @@ function new_game(){ // 초기화 작업
 	
 	window.setTimeout(function(){
 		console.log("게임 준비 완료");
+		stage_timer();//-----------------------타이머-------------
 		//rotate();
 	}, 3000); 
 }
 
 function clear_game(){// 클리어. 다시하기
-	result = 0; 
-	select_box = 0; 
-	result_box = 0;
+	
 	console.log("클리어");
 	$('#game_state').val($('#game_state').val()+"\n맞췄습니다\n");
 
@@ -46,12 +52,26 @@ function clear_game(){// 클리어. 다시하기
 }
 function change_color(i){
 	window.setTimeout(function(){
-		box_id[i].style.backgroundColor = "MidnightBlue";// 빨강
+		box_id[i].style.backgroundColor = "MidnightBlue";//
 	}, 1000);
 	window.setTimeout(function(){
-		box_id[i].style.backgroundColor = "RoyalBlue";// 검정
+		box_id[i].style.backgroundColor = "RoyalBlue";// 
 	}, 2000);
 }
+//------------------------------------------------------
+function stage_timer(){
+	g_count = window.setInterval(function(){
+		if(count >=0){
+			time_count.value=count; // 5->0 으로 하나씩 출력
+			count--;
+		}else{ //카운트가 0이 됐을때 time over
+			window.clearInterval(g_count); 
+			console.log("time over");
+		}
+	}, 1000);
+}
+
+//-----------------------------------------------------
 
 function rotate(){ //화면 회전용 함수.. 추가회전시 각도 문제 남아있음
 	$('#puzzleTop').animate({  borderSpacing: -90 }, {
@@ -99,22 +119,22 @@ var box7 = document.getElementById('h');
 var box8 = document.getElementById('i');
 
 var state_area = document.getElementById('game_state');
+var time_count = document.getElementById('count_state');
 var start_game = document.getElementById('start_game');
 
-box_id = [box0,box1,box2,box3,box4,box5,box6,box7,box8]; //배열에 id 저장
+	box_id = [box0,box1,box2,box3,box4,box5,box6,box7,box8]; //배열에 id 저장
 
 //box_data[]의 값은 t/f.. 해당 박스의 정답 여부
-box0.onclick = function(){	box_click(box_data[0],0);}
-box1.onclick = function(){	box_click(box_data[1],1);}
-box2.onclick = function(){	box_click(box_data[2],2);}
-box3.onclick = function(){	box_click(box_data[3],3);}
-box4.onclick = function(){	box_click(box_data[4],4);}
-box5.onclick = function(){	box_click(box_data[5],5);}
-box6.onclick = function(){	box_click(box_data[6],6);}
-box7.onclick = function(){	box_click(box_data[7],7);}
-box8.onclick = function(){	box_click(box_data[8],8);}
+box0.onclick = function(){	box_click(box_data[0],0); }
+box1.onclick = function(){	box_click(box_data[1],1); }
+box2.onclick = function(){	box_click(box_data[2],2); }
+box3.onclick = function(){	box_click(box_data[3],3); }
+box4.onclick = function(){	box_click(box_data[4],4); }
+box5.onclick = function(){	box_click(box_data[5],5); }
+box6.onclick = function(){	box_click(box_data[6],6); }
+box7.onclick = function(){	box_click(box_data[7],7); }
+box8.onclick = function(){	box_click(box_data[8],8); }
 
 
 	start_game.onclick= function(){new_game();};//버튼 선택시 새게임
-
 
