@@ -8,6 +8,7 @@ var select_box = 0; // 현재 선택한 박스 겟수
 var result_box = 0; // 현재 선택된 박스중 true 갯수
 var count; // 제한시간용 변수
 var g_count;
+var timer_stop = 0; //시간 정지를 위해 임시로
 
 function new_game(){ // 초기화 작업
     $('#puzzleTop').css('-webkit-transform',''); 
@@ -17,6 +18,7 @@ function new_game(){ // 초기화 작업
 	result = 0; 
 	select_box = 0; 
 	result_box = 0;
+	timer_stop = 0;
 	
 	for(var i=0; i<9; i++){
 		//초기화
@@ -64,7 +66,7 @@ function change_color(i){
 //------------------------------------------------------
 function stage_timer(){
 	g_count = window.setInterval(function(){
-		if(count >=0){
+		if(timer_stop == 0 && count >=0){
 			time_count.value=count; // 5->0 으로 하나씩 출력
 			count--;
 		}else{ //카운트가 0이 됐을때 time over
@@ -122,6 +124,7 @@ function box_click(select , value){ // 박스 선택시. 배열과 비교하여 
        
 	 if(result_box == select_box && result_box == result){//result_box == select_box && 
 			console.log("총 선택된 박스 수: "+select_box+", 선택된 정답 수 : "+result_box);
+			timer_stop = 1;
 			clear_game();
 		}
 };
