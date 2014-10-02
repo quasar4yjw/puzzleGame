@@ -49,10 +49,10 @@ function new_game(){ //새게임
 function clear_game(){// 클리어. 다시하기
 	
 	console.log("클리어");
-	$('#game_state').val($('#game_state').val()+"\n오호라? 맞췄네!\n");
+	//$('#game_state').val($('#game_state').val()+"\n오호라? 맞췄네!\n");
 
-	var appendText = document.createTextNode("스테이지 클리어\n"); 
-	state_area.appendChild(appendText); 
+	//var appendText = document.createTextNode("스테이지 클리어\n"); 
+	//state_area.appendChild(appendText); 
 
 }
 function change_color(i){
@@ -72,6 +72,11 @@ function stage_timer(){
 		}else{ //카운트가 0이 됐을때 time over
 			window.clearInterval(g_count); 
 			console.log("time over");
+			if(timer_stop == 1){
+				$('#game_state').val($('#game_state').val()+"\n오호라? 맞췄네!\n");
+			}else{
+				$('#game_state').val($('#game_state').val()+"\n와우!! 못맞췄네!\n");
+			}
 		}
 	}, 1000);
 }
