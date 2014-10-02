@@ -41,7 +41,6 @@ function new_game(){ // 초기화 작업
 	window.setTimeout(function(){
 		console.log("게임 준비 완료");
 		stage_timer();//-----------------------타이머-------------
-		//rotate();
 		rotateCell($('#puzzleTop'));
 	}, 3000); 
 }
@@ -63,7 +62,7 @@ function change_color(i){
 		box_id[i].style.backgroundColor = "RoyalBlue";// 
 	}, 2000);
 }
-//------------------------------------------------------
+
 function stage_timer(){
 	g_count = window.setInterval(function(){
 		if(timer_stop == 0 && count >=0){
@@ -76,18 +75,13 @@ function stage_timer(){
 	}, 1000);
 }
 
-//-----------------------------------------------------
-
 function rotateCell(element){
-	
-	
+
 	element.animate({  borderSpacing: -90 }, {
 	      step: function(now,fx) {
 	        $('#puzzleTop').css('-webkit-transform','rotate('+(now)+'deg)'); 
 	        $('#puzzleTop').css('-moz-transform','rotate('+(now)+'deg)');
 	        $('#puzzleTop').css('transform','rotate('+(now)+'deg)');
-	        
-	        //console.log(now); //각도 출력
 	      },
 	      duration:'low'
 	  },'linear');
@@ -97,12 +91,9 @@ function rotateCell(element){
 	        $('#puzzleTop').css('-webkit-transform','rotate('+(now-90)+'deg)'); 
 	        $('#puzzleTop').css('-moz-transform','rotate('+(now-90)+'deg)');
 	        $('#puzzleTop').css('transform','rotate('+(now-90)+'deg)');
-	        //console.log(now); //각도 출력
-	       
 	      },
 	      duration:'low'
 	  },'linear'); }, 500); 
-
 }
 
 function box_click(select , value){ // 박스 선택시. 배열과 비교하여 맞췄는지 확인
@@ -156,6 +147,4 @@ box6.onclick = function(){	box_click(box_data[6],6); }
 box7.onclick = function(){	box_click(box_data[7],7); }
 box8.onclick = function(){	box_click(box_data[8],8); }
 
-
-	start_game.onclick= function(){new_game();};//버튼 선택시 새게임
-
+	start_game.onclick= function(){new_game();};//게임 시작
