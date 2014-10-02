@@ -10,7 +10,8 @@ var count; // 제한시간용 변수
 var g_count;
 var timer_stop = 0; //시간 정지를 위해 임시로
 
-function new_game(){ // 초기화 작업
+function new_game(){ //새게임
+	//-----------초기화 작업
     $('#puzzleTop').css('-webkit-transform',''); 
     $('#puzzleTop').css('-moz-transform','');
 	$('#puzzleTop').css('transform', '');
@@ -19,9 +20,9 @@ function new_game(){ // 초기화 작업
 	select_box = 0; 
 	result_box = 0;
 	timer_stop = 0;
+	//---------------------
 	
-	for(var i=0; i<9; i++){
-		//초기화
+	for(var i=0; i<9; i++){		//초기화
 		box_id[i].style.backgroundColor = "RoyalBlue"; // 현재 색상 모두 검정
 		box_state[i] = false; // 현재 상태 모두 뒷면
 		
