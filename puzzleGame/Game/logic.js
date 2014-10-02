@@ -46,15 +46,6 @@ function new_game(){ //새게임
 	}, 3000); 
 }
 
-function clear_game(){// 클리어. 다시하기
-	
-	console.log("클리어");
-	//$('#game_state').val($('#game_state').val()+"\n오호라? 맞췄네!\n");
-
-	//var appendText = document.createTextNode("스테이지 클리어\n"); 
-	//state_area.appendChild(appendText); 
-
-}
 function change_color(i){
 	window.setTimeout(function(){
 		box_id[i].style.backgroundColor = "MidnightBlue";//
@@ -122,7 +113,6 @@ function box_click(select , value){ // 박스 선택시. 배열과 비교하여 
 	 if(result_box == select_box && result_box == result){//result_box == select_box && 
 			console.log("총 선택된 박스 수: "+select_box+", 선택된 정답 수 : "+result_box);
 			timer_stop = 1;
-			clear_game();
 		}
 };
 
